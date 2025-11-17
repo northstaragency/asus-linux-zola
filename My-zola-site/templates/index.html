@@ -1,0 +1,284 @@
+{% extends "base.html" %}
+{% block extra_css %}
+<link rel="stylesheet" href="{{ get_url(path='css/global.css') }}">
+<link rel="stylesheet" href="{{ get_url(path='css/styles.css') }}">
+{% endblock %}
+
+{% block title %}ROG Control Center - Control your ASUS laptop on Linux{% endblock %}
+
+{% block content %}
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-bg"></div>
+        <div class="hero-content fade-in-up">
+            <h1>Control your ASUS laptop on Linux</h1>
+            <p class="hero-subtext">Profiles, GPU switching, battery care, and fan curves in one safe app. Unlock full
+                control of your ROG hardware with reversible, battle-tested tools built for Linux.</p>
+
+            <!-- Mini Demo -->
+            <div class="mini-demo">
+                <div class="demo-header">
+                    <div class="demo-mode" id="demoMode">Balanced</div>
+                    <div class="demo-badge" id="demoBadge">Reboot required</div>
+                </div>
+                <div class="demo-row">
+                    <span class="demo-label">GPU Mode</span>
+                    <span class="demo-value" id="demoGPU">Hybrid</span>
+                </div>
+                <div class="demo-row">
+                    <span class="demo-label">CPU Boost</span>
+                    <span class="demo-value" id="demoCPU">Auto</span>
+                </div>
+                <div class="demo-row">
+                    <span class="demo-label">Fan Profile</span>
+                    <span class="demo-value" id="demoFan">Balanced</span>
+                </div>
+            </div>
+
+            <div class="cta-group">
+                <a href="{{ get_url(path='@/rog-install.md') }}" class="btn btn-primary">Get Control Center</a>
+                <a href="{{ get_url(path='@/catelog.md') }}" class="btn btn-secondary">Catelog</a>
+            </div>
+
+            <div class="social-proof">
+                <div class="stat">
+                    <span class="tooltip">G14, G15, Flow X13, Zephyrus, and more</span>
+                    <span class="stat-number">127+</span>
+                    <span class="stat-label">Supported models</span>
+                </div>
+                <div class="stat">
+                    <span class="tooltip">Active installs across all distros</span>
+                    <span class="stat-number">18.5K</span>
+                    <span class="stat-label">Weekly downloads</span>
+                </div>
+                <div class="stat">
+                    <span class="tooltip">Released October 12, 2025</span>
+                    <span class="stat-number">v3.2.1</span>
+                    <span class="stat-label">Latest release</span>
+                </div>
+                <div class="stat">
+                    <span class="tooltip">All package repos and services operational</span>
+                    <span class="stat-number" style="color: #00ff88;">●</span>
+                    <span class="stat-label">Services online</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem → Outcome Features -->
+    <section id="product">
+        <h2 class="section-title">What You Get</h2>
+
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3 class="feature-title">Switch GPUs safely</h3>
+                <p class="feature-desc">Toggle between integrated and dedicated graphics with automatic reboot handling.
+                    Save battery on the go, unleash power when gaming—without terminal commands or config file edits.
+                </p>
+                <a href="{{ get_url(path='@/rog-playbook.md') }}" class="feature-link">Try: Switch to iGPU for battery →</a>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🌡️</div>
+                <h3 class="feature-title">Cool and quiet</h3>
+                <p class="feature-desc">Custom fan curves that adapt to your workflow. Keep your laptop whisper-quiet
+                    during work, ramp up for gaming, or set per-app profiles so your fans know when to kick in.</p>
+                <a href="{{ get_url(path='@/rog-playbook.md') }}" class="feature-link">Try: Quiet fans at night →</a>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🔋</div>
+                <h3 class="feature-title">Protect battery life</h3>
+                <p class="feature-desc">Cap charging at 80% to extend battery lifespan, or temporarily allow 100% when
+                    you need full capacity. One click to preserve your hardware investment.</p>
+                <a href="{{ get_url(path='@/rog-playbook.md') }}" class="feature-link">Try: Charge to 80% cap →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Product Demo -->
+    <section>
+        <h2 class="section-title">Control at Your Fingertips</h2>
+        <p style="text-align: center; color: var(--text-secondary); margin-bottom: 2rem;">Click any control to
+            toggle—just like in the app's Simple mode</p>
+
+        <div class="demo-panel">
+            <div class="demo-controls">
+                <div class="control-item" onclick="toggleControl(this)">
+                    <div class="control-label">Active Profile</div>
+                    <div class="control-value">
+                        Balanced
+                        <div class="toggle-indicator"></div>
+                    </div>
+                </div>
+                <div class="control-item" onclick="toggleControl(this)">
+                    <div class="control-label">GPU Mode</div>
+                    <div class="control-value">
+                        Hybrid
+                        <div class="toggle-indicator"></div>
+                    </div>
+                </div>
+                <div class="control-item" onclick="toggleControl(this)">
+                    <div class="control-label">Battery Cap</div>
+                    <div class="control-value">
+                        80%
+                        <div class="toggle-indicator"></div>
+                    </div>
+                </div>
+                <div class="control-item" onclick="toggleControl(this)">
+                    <div class="control-label">Fan Mode</div>
+                    <div class="control-value">
+                        Auto
+                        <div class="toggle-indicator"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="feature-grid" style="margin-top: 3rem;">
+            <div class="feature-card">
+                <h3 class="feature-title">Profiles</h3>
+                <p class="feature-desc">Switch between Silent, Balanced, and Performance modes instantly. Each profile
+                    adjusts CPU limits, fan behavior, and GPU preference to match your needs.</p>
+            </div>
+
+            <div class="feature-card">
+                <h3 class="feature-title">Per-App Profiles</h3>
+                <p class="feature-desc">Automatically switch to dGPU and Performance mode when you launch a game, then
+                    revert to battery-saving settings when you close it.</p>
+            </div>
+
+            <div class="feature-card">
+                <h3 class="feature-title">Safe & Reversible</h3>
+                <p class="feature-desc">Every change can be undone. Confirmations on risky actions, readable logs, and a
+                    reset button ensure you're always in control.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Install Section -->
+    <section id="install">
+        <h2 class="section-title">Install in Under 5 Minutes</h2>
+
+        <div class="install-container">
+            <p style="color: var(--text-secondary); margin-bottom: 2rem; text-align: center;">Our Suggestion: <strong
+                    style="color: var(--text-primary);">Arch Linux</strong></p>
+
+            <div class="distro-tabs">
+                <div class="distro-tab active" data-distro="arch">Arch</div>
+                <div class="distro-tab" data-distro="debian">Debian/Ubuntu</div>
+                <div class="distro-tab" data-distro="fedora">Fedora</div>
+                <div class="distro-tab" data-distro="opensuse">openSUSE</div>
+            </div>
+
+            <div class="code-block">
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                <code
+                    id="installCode">sudo pacman -S --needed asusctl supergfxctl && sudo systemctl enable --now asusd supergfxd</code>
+            </div>
+
+            <div class="success-check" id="successCheck">
+                <div class="check-question">
+                    <span style="font-weight: 600;">Ran it?</span>
+                    <button class="check-btn" onclick="markSuccess()">✓ Yes, it worked</button>
+                    <button class="check-btn" onclick="showTroubleshoot()">It failed?</button>
+                </div>
+                <div class="troubleshoot" id="troubleshoot">
+                    <strong style="display: block; margin-bottom: 0.5rem;">Common fixes for Arch:</strong>
+                    <div class="code-block" style="margin-top: 1rem;">
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                        <code># Update keyring first<br>sudo pacman -S archlinux-keyring<br>yay -Syu</code>
+                    </div>
+                </div>
+            </div>
+
+            <h3 style="margin: 2rem 0 1rem;">Preflight Checklist</h3>
+            <ul style="color: var(--text-secondary); line-height: 2;">
+                <li>✓ You have sudo access</li>
+                <li>✓ Your system is up to date</li>
+                <li>✓ You'll complete 3 steps in under 5 minutes</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Playbooks -->
+    <section id="playbooks">
+        <h2 class="section-title">Quick Start Playbooks</h2>
+
+        <div class="feature-grid">
+
+            <div class="feature-card">
+                <h3 class="feature-title">Switch to iGPU for battery</h3>
+                <div class="playbook-meta">
+                    <span class="meta-item"><strong>Time:</strong> 2 min</span>
+                    <span class="meta-item"><strong>Level:</strong> Beginner</span>
+                    <a href="{{ get_url(path='@/rog-playbook.md') }}" class="demo-link">
+                        <span class="demo-badge-card">Try in demo</span>
+                    </a>
+                </div>
+                <p class="feature-desc">Disable the dedicated GPU to maximize battery life. Perfect for travel or long
+                    work sessions away from power.</p>
+            </div>
+
+            <div class="feature-card">
+                <h3 class="feature-title">Quiet fans at night</h3>
+                <div class="playbook-meta">
+                    <span class="meta-item"><strong>Time:</strong> 1 min</span>
+                    <span class="meta-item"><strong>Level:</strong> Beginner</span>
+                    <a href="{{ get_url(path='@/rog-playbook.md') }}" class="demo-link">
+                        <span class="demo-badge-card">Try in demo</span>
+                    </a>
+                </div>
+                <p class="feature-desc">Set a custom fan curve that keeps noise under 30dB. Ideal for late-night coding
+                    or studying.</p>
+            </div>
+
+            <div class="feature-card">
+                <h3 class="feature-title">Charge to 80% cap</h3>
+                <div class="playbook-meta">
+                    <span class="meta-item"><strong>Time:</strong> 30 sec</span>
+                    <span class="meta-item"><strong>Level:</strong> Beginner</span>
+                    <a href="{{ get_url(path='@/rog-playbook.md') }}" class="demo-link">
+                        <span class="demo-badge-card">Try in demo</span>
+                    </a>
+                </div>
+                <p class="feature-desc">Enable battery care mode to stop charging at 80%, extending your battery's
+                    lifespan by years.</p>
+            </div>
+
+            <div class="feature-card">
+                <h3 class="feature-title">Enable per-app dGPU</h3>
+                <div class="playbook-meta">
+                    <span class="meta-item"><strong>Time:</strong> 3 min</span>
+                    <span class="meta-item"><strong>Level:</strong> Intermediate</span>
+                </div>
+                <p class="feature-desc">Configure automatic GPU switching for specific applications. Games get full
+                    power, everything else saves battery.</p>
+            </div>
+
+            <div class="feature-card">
+                <h3 class="feature-title">Fix no sound issue</h3>
+                <div class="playbook-meta">
+                    <span class="meta-item"><strong>Time:</strong> 2 min</span>
+                    <span class="meta-item"><strong>Level:</strong> Beginner</span>
+                </div>
+                <p class="feature-desc">Resolve common audio problems on ROG laptops with a simple configuration tweak.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <h3 class="feature-title">Performance mode for gaming</h3>
+                <div class="playbook-meta">
+                    <span class="meta-item"><strong>Time:</strong> 1 min</span>
+                    <span class="meta-item"><strong>Level:</strong> Beginner</span>
+                    <a href="{{ get_url(path='@/rog-playbook.md') }}" class="demo-link">
+                        <span class="demo-badge-card">Try in demo</span>
+                    </a>
+                </div>
+                <p class="feature-desc">Unlock maximum performance with one click. Boost clocks, aggressive fans, and
+                    dedicated GPU.</p>
+            </div>
+        </div>
+    </section>
+{% endblock %}

@@ -1,0 +1,148 @@
+{% extends "base.html" %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ get_url(path='css/playbooks.css') }}">
+<link rel="stylesheet" href="{{ get_url(path='css/global.css')}}">
+{% endblock %}
+
+{% block title %}Playbooks - ROG Control Center{% endblock %}
+
+{% block content %}
+<!-- Custom Cursor -->
+    <div class="cursor"></div>
+    <div class="cursor-glow"></div>
+    <main>
+        <div class="page-header">
+            <h1>Playbooks</h1>
+            <p class="page-subtitle">Outcome-driven guides you can complete in minutes. Every step is scannable, confirmable, and reversible.</p>
+        </div>
+
+        <!-- Search and Filters -->
+        <div class="search-section">
+            <input type="text" class="search-bar" placeholder="Search playbooks by name, outcome, or device..." id="searchInput">
+            
+            <div class="filters">
+                <span class="filter-label">Level:</span>
+                <div class="filter-group">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="beginner">Beginner</button>
+                    <button class="filter-btn" data-filter="intermediate">Intermediate</button>
+                </div>
+                <span class="filter-label">Time:</span>
+                <div class="filter-group">
+                    <button class="filter-btn" data-filter="<2min">&lt;2 min</button>
+                    <button class="filter-btn" data-filter="2-3min">2-3 min</button>
+                    <button class="filter-btn" data-filter=">3min">&gt;3 min</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Featured Row -->
+        <section class="featured-section">
+            <div class="section-header">
+                <h2 class="section-title">Featured</h2>
+                <span class="section-count">Most popular guides</span>
+            </div>
+            <div class="featured-grid" id="featuredGrid">
+                <!-- Featured cards will be populated by JS -->
+            </div>
+        </section>
+
+        <!-- Performance & Thermals -->
+        <section class="category-section">
+            <div class="section-header">
+                <h2 class="section-title">Performance & Thermals</h2>
+                <span class="section-count" id="performanceCount">0 guides</span>
+            </div>
+            <div class="playbook-grid" id="performanceGrid">
+                <!-- Cards will be populated by JS -->
+            </div>
+        </section>
+
+        <!-- Graphics & Display -->
+        <section class="category-section">
+            <div class="section-header">
+                <h2 class="section-title">Graphics & Display</h2>
+                <span class="section-count" id="graphicsCount">0 guides</span>
+            </div>
+            <div class="playbook-grid" id="graphicsGrid">
+                <!-- Cards will be populated by JS -->
+            </div>
+        </section>
+
+        <!-- Battery & Power -->
+        <section class="category-section">
+            <div class="section-header">
+                <h2 class="section-title">Battery & Power</h2>
+                <span class="section-count" id="batteryCount">0 guides</span>
+            </div>
+            <div class="playbook-grid" id="batteryGrid">
+                <!-- Cards will be populated by JS -->
+            </div>
+        </section>
+
+        <!-- Audio & Devices -->
+        <section class="category-section">
+            <div class="section-header">
+                <h2 class="section-title">Audio & Devices</h2>
+                <span class="section-count" id="audioCount">0 guides</span>
+            </div>
+            <div class="playbook-grid" id="audioGrid">
+                <!-- Cards will be populated by JS -->
+            </div>
+        </section>
+
+        <!-- Troubleshooting -->
+        <section class="category-section">
+            <div class="section-header">
+                <h2 class="section-title">Troubleshooting</h2>
+                <span class="section-count" id="troubleshootingCount">0 guides</span>
+            </div>
+            <div class="playbook-grid" id="troubleshootingGrid">
+                <!-- Cards will be populated by JS -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Playbook Detail View -->
+    <div class="detail-view" id="detailView">
+        <button class="close-btn" onclick="closeDetail()">×</button>
+        <div class="detail-container">
+            <div class="detail-content">
+                <!-- Dynamic content will be loaded here -->
+            </div>
+            <div class="status-rail">
+                <div class="status-panel">
+                    <h3>Device Status</h3>
+                    <div class="status-item">
+                        <span class="status-label">Model</span>
+                        <span class="status-value">ROG Zephyrus G14</span>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-label">GPU Mode</span>
+                        <span class="status-value">Hybrid</span>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-label">Battery Cap</span>
+                        <span class="status-value">100%</span>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-label">Fan Profile</span>
+                        <span class="status-value">Balanced</span>
+                    </div>
+                </div>
+                
+                <div class="status-panel">
+                    <h3>Tips</h3>
+                    <p class="tips-content">
+                        Each step can be verified before moving forward. Click "Confirm Step" when you're ready to proceed to the next action.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{{ get_url(path='js/playbooks.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{{ config.title }}{% endblock %}</title>
+    {% block extra_css %}
+    <link rel="stylesheet" href="{{ get_url(path='css/global.css') }}">
+    {% endblock %}
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">
+                <div class="ROG-logo">
+                    <img src="{{ get_url(path='icons/rog.svg') }}" alt="">
+                </div>
+            </div>
+            <ul class="nav-links">
+                <li><a href="{{ get_url(path='@/_index.md') }}">Home</a></li>
+                <li><a href="{{ get_url(path='@/rog-producthub.md') }}">Product</a></li>
+                <li><a href="{{ get_url(path='@/rog-install.md') }}">Install</a></li>
+                <li><a href="{{ get_url(path='@/rog-playbook.md') }}">Playbooks</a></li>
+                <li><a href="{{ get_url(path='@/rog-community.md') }}">Community</a></li>
+            </ul>
+            <button class="mobile-menu-btn">☰</button>
+        </div>
+    </nav>
+
+    {% block content %}{% endblock %}
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Documentation</h3>
+                <ul class="footer-links">
+                    <li><a href="{{ get_url(path='@/docs.md') }}">Docs</a></li>
+                    <li><a href="#changelog">Changelog</a></li>
+                    <li><a href="{{ get_url(path='@/roadmap.md') }}">Roadmap</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Support</h3>
+                <ul class="footer-links">
+                    <li><a href="#matrix">Support Matrix</a></li>
+                    <li><a href="#contribute">Contribute</a></li>
+                    <li><a href="#models">Models</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Community</h3>
+                <ul class="footer-links">
+                    <li><a href="#discord">Discord</a></li>
+                    <li><a href="#github">GitHub</a></li>
+                    <li><a href="#status">Status</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Legal</h3>
+                <ul class="footer-links">
+                    <li><a href="{{ get_url(path='@/legal.md') }}">License</a></li>
+                    <li><a href="{{ get_url(path='@/legal.md') }}">Privacy</a></li>
+                    <li><a href="{{ get_url(path='@/legal.md') }}">Terms</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{{ get_url(path='js/Script.js') }}"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+
+</html>

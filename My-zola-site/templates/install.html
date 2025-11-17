@@ -1,0 +1,562 @@
+{% extends "base.html" %}
+{% block extra_css %}
+<link rel="stylesheet" href="{{ get_url(path='css/global.css') }}">
+<link rel="stylesheet" href="{{ get_url(path='css/install-styles.css') }}">
+{% endblock %}
+
+{% block title %}Install ROG Control Center{% endblock %}
+
+{% block content %}
+<main>
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Install ROG Control Center on your ASUS laptop</h1>
+            <p class="hero-subtext">3 steps, under 5 minutes. Safe to run. Reversible any time.</p>
+
+            <div class="preflight">
+                <div class="preflight-title">
+                    <span>✓</span> Quick checks before we start
+                </div>
+                <div class="check-grid">
+                    <div class="check-item">
+                        <span class="check-icon">✓</span>
+                        <span class="check-label">You have sudo access</span>
+                    </div>
+                    <div class="check-item">
+                        <span class="check-icon">✓</span>
+                        <span class="check-label">Internet connection active</span>
+                    </div>
+                    <div class="check-item">
+                        <span class="check-icon">✓</span>
+                        <span class="check-label">System up-to-date</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="install-section">
+                <div class="tabs">
+                    <button class="tab active" onclick="switchTab('arch')">Arch </button>
+                    <button class="tab" onclick="switchTab('fedora')">Fedora</button>
+                    <button class="tab" onclick="switchTab('ubuntu')">Ubuntu/Debian</button>
+                    <button class="tab" onclick="switchTab('opensuse')">openSUSE</button>
+                    <button class="tab" onclick="switchTab('cachyos')">CachyOS</button>
+                </div>
+                <!-- Arch content 
+ ---------------
+ ---------------(._.)────୨ৎ────-->
+                <div id="arch" class="tab-content active">
+                    <div>
+                        <h3 class="step-title">Note</h3>
+                        <p class="step-description">These steps are for Arch linux and related distros only for CachyOS
+                            we have seperate guide</p>
+                    </div>
+                    <div class="steps-container">
+                        <div class="step-block">
+                            <span class="step-indicator">Step 1 of 6</span>
+                            <h3 class="step-title">Post installation setups</h3>
+                            <p class="step-description">Add the ASUS Linux keys</p>
+
+                            <div class="command-block">
+                                <div class="command-label">Run this command:</div>
+                                <div class="command-code">sudo pacman-key --recv-keys
+                                    8F654886F17D497FEFE3DB448B15A6B0E9A3FA35
+                                    sudo pacman-key --lsign-key 8F654886F17D497FEFE3DB448B15A6B0E9A3FA35</div>
+                                <button class="copy-btn"
+                                    onclick="copyCommand(this, 'sudo pacman-key --recv-keys 8F654886F17D497FEFE3DB448B15A6B0E9A3FA35 sudo pacman-key --lsign-key 8F654886F17D497FEFE3DB448B15A6B0E9A3FA35')">Copy</button>
+                            </div>
+                            <div class="expected-output">
+                                <div class="expected-label">Expected output</div>
+                                <div class="expected-text">Keys will be installed</div>
+                            </div>
+                        </div>
+                        <div class="step-block">
+                            <span class="step-indicator">Step 2 of 6</span>
+                            <h3 class="step-title">Adding G14 repositories</h3>
+                            <p class="step-description">Edit /etc/pacman.conf (use sudo nano /etc/pacman.conf): Add
+                                at the end</p>
+                            <div class="command-block">
+                                <div class="command-label">Add the following lines:</div>
+                                <div class="command-code">[g14]
+                                    Server = https://arch.asus-linux.org
+                                </div>
+                                <button class="copy-btn"
+                                    onclick="copyCommand(this, '[g14] Server = https://arch.asus-linux.org')">Copy</button>
+                            </div>
+                            <div class="expected-output">
+                                <div class="expected-label">Expected output</div>
+                                <div class="expected-text">Repository added successfully.</div>
+                            </div>
+
+                        </div>
+                        <div class="step-block">
+                            <span class="step-indicator">Step 3 of 6</span>
+                            <h3 class="step-title">Sync the packages</h3>
+                            <p class="step-description">update your System</p>
+                            <div class="command-block">
+                                <div class="command-label">Run this command:</div>
+                                <div class="command-code"> sudo pacman -Syy
+                                </div>
+                                <button class="copy-btn" onclick="copyCommand(this, ' sudo pacman -Syy')">Copy</button>
+                            </div>
+                            <div class="expected-output">
+                                <div class="expected-label">Expected output</div>
+                                <div class="expected-text">Your system updated successfully</div>
+                            </div>
+                        </div>
+                        <div class="step-block">
+                            <span class="step-indicator">Step 4 of 6</span>
+                            <h3 class="step-title">Install Core ROG Tools</h3>
+                            <p class="step-description">Install asusctl for fan/RGB control</p>
+                            <div class="command-block">
+                                <div class="command-label">Run this command:</div>
+                                <div class="command-code"> sudo pacman -S asusctl power-profiles-daemon
+                                </div>
+                                <button class="copy-btn"
+                                    onclick="copyCommand(this, ' sudo pacman -S asusctl power-profiles-daemon')">Copy</button>
+                            </div>
+                            <p class="step-description">Enable power profiles</p>
+                            <div class="command-block">
+                                <div class="command-label">Run this command:</div>
+                                <div class="command-code"> sudo systemctl enable --now power-profiles-daemon.service
+                                </div>
+                                <button class="copy-btn"
+                                    onclick="copyCommand(this, ' sudo systemctl enable --now power-profiles-daemon.service')">Copy</button>
+                            </div>
+                            <div class="expected-output">
+                                <div class="expected-label">Expected output</div>
+                                <div class="expected-text">Your system updated with power-profiles-daemon
+                                    successfully</div>
+                            </div>
+                        </div>
+                        <div class="step-block">
+                            <span class="step-indicator">Step 5 of 6</span>
+                            <h3 class="step-title">supergfxctl</h3>
+                            <p class="step-description"> Controls you GPU, <strong>Note: </strong>only needed if you
+                                have DGPU</p>
+                            <div class="command-block">
+                                <div class="command-label">Run this command:</div>
+                                <div class="command-code"> sudo pacman -S supergfxctl
+                                </div>
+                                <button class="copy-btn"
+                                    onclick="copyCommand(this, ' sudo pacman -S supergfxctl')">Copy</button>
+                            </div>
+                            <div class="step-description">Then</div>
+                            <div class="command-block">
+                                <div class="command-label">Run this command:</div>
+                                <div class="command-code"> systemctl enable --now supergfxd
+                                </div>
+                                <button class="copy-btn"
+                                    onclick="copyCommand(this, ' systemctl enable --now supergfxd')">Copy</button>
+                            </div>
+                            <div class="expected-output">
+                                <div class="expected-label">Expected output</div>
+                                <div class="expected-text">Now you can control you GPU behaviour</div>
+                            </div>
+                        </div>
+                        <div class="step-block">
+                            <span class="step-indicator">Step 6 of 6</span>
+                            <h3 class="step-title">ROG Control Center</h3>
+                            <p class="step-description">Now it's time to get you GUI control center</p>
+                            <div class="command-block">
+                                <div class="command-label">Run this command:</div>
+                                <div class="command-code"> sudo pacman -S rog-control-center
+                                </div>
+                                <button class="copy-btn"
+                                    onclick="copyCommand(this, ' sudo pacman -S rog-control-center')">Copy</button>
+                            </div>
+                            <div class="expected-output">
+                                <div class="expected-label">Expected output</div>
+                                <div class="expected-text">Now your system is ready to use</div>
+                            </div>
+                        </div>
+                        <div class="step-block">
+                            <span class="step-indicator">Step 7 of 6</span>
+                            <h3 class="step-title">Custom Kernel</h3>
+                            <p class="step-description"><strong>Note: </strong>not everyone requires Custom Kernel,
+                                but often require by newer devices</p>
+                            <div class="command-block">
+                                <div class="command-label">Run this command:</div>
+                                <div class="command-code"> pacman -Sy linux-g14 linux-g14-headers
+                                    <button class="copy-btn"
+                                        onclick="copyCommand(this, ' pacman -Sy linux-g14 linux-g14-headers')">Copy</button>
+                                </div>
+
+                            </div>
+                            <span class="reassurance">🛡️ Safe to run • Fully reversible</span>
+                        </div>
+
+                        <a href="https://asus-linux.org/guides/" class="help-link" target="_blank">
+                            ⚠️ Having trouble? Get step-by-step fixes →
+                        </a>
+                    </div>
+
+
+                </div>
+                <!-- Fedora content
+ ------------------
+ ------------------(._.)────୨ৎ──── -->
+                <div id="fedora" class="tab-content">
+                    <div>
+                        <h3 class="step-title">Note</h3>
+                        <p class="step-description">Arch linux is only supported distro for asus laptop, for easy
+                            installation we recommend CachyOS. Fedora support has been ended.</p>
+                    </div>
+                    <div class="steps-container">
+                        <div class="step-block">
+                            <span class="step-indicator">Step 1 of 5</span>
+                            <h3 class="step-title">Update Fedora</h3>
+                            <p class="step-description">Ensure your system is up-to-date before installing anything.
+                            </p>
+                            <div class="command-block">
+                                <div class="command-label">Run this command:</div>
+                                <div class="command-code">sudo dnf update -y</div>
+                                <button class="copy-btn" onclick="copyCommand(this, 'sudo dnf update -y')">Copy</button>
+                            </div>
+                            <div class="expected-output">
+                                <div class="expected-label">Expected output</div>
+                                <div class="expected-text">System packages updated successfully.</div>
+                            </div>
+                        </div>
+
+                        <div class="step-block">
+                            <span class="step-indicator">Step 2 of 5</span>
+                            <h3 class="step-title">Enable RPM Fusion (for NVIDIA users)</h3>
+                            <p class="step-description">Required for proprietary NVIDIA drivers.</p>
+                            <div class="command-block">
+                                <div class="command-label">Run this command:</div>
+                                <div class="command-code">
+                                    sudo dnf install
+                                    https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E
+                                    %fedora).noarch.rpm
+                                    https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E
+                                    %fedora).noarch.rpm
+                                </div>
+                                <button class="copy-btn"
+                                    onclick="copyCommand(this, 'sudo dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm')">Copy</button>
+                            </div>
+                            <div class="expected-output">
+                                <div class="expected-label">Expected output</div>
+                                <div class="expected-text">RPM Fusion repositories enabled.</div>
+                            </div>
+                        </div>
+
+                        <div class="step-block">
+                            <span class="step-indicator">Step 3 of 5</span>
+                            <h3 class="step-title">Enable the COPR repository</h3>
+                            <p class="step-description">Add the asus-linux repository to access ROG packages.</p>
+                            <div class="command-block">
+                                <div class="command-label">Run this command:</div>
+                                <div class="command-code">sudo dnf copr enable lukenukem/asus-linux</div>
+                                <button class="copy-btn"
+                                    onclick="copyCommand(this, 'sudo dnf copr enable lukenukem/asus-linux')">Copy</button>
+                            </div>
+                            <div class="expected-output">
+                                <div class="expected-label">Expected output</div>
+                                <div class="expected-text">Repository enabled successfully.</div>
+                            </div>
+                        </div>
+
+                        <div class="step-block">
+                            <span class="step-indicator">Step 4 of 5</span>
+                            <h3 class="step-title">Install ROG packages</h3>
+                            <p class="step-description">Install asusctl and supergfxctl for hardware control.</p>
+                            <div class="command-block">
+                                <div class="command-label">Run this command:</div>
+                                <div class="command-code">sudo dnf install asusctl supergfxctl</div>
+                                <button class="copy-btn"
+                                    onclick="copyCommand(this, 'sudo dnf install asusctl supergfxctl')">Copy</button>
+                            </div>
+                            <div class="expected-output">
+                                <div class="expected-label">Expected output</div>
+                                <div class="expected-text">Packages installed and services started.</div>
+                            </div>
+                        </div>
+
+                        <div class="step-block">
+                            <span class="step-indicator">Step 5 of 5</span>
+                            <h3 class="step-title">Enable services</h3>
+                            <p class="step-description">Start the background daemons for GPU switching and power
+                                profiles.</p>
+                            <div class="command-block">
+                                <div class="command-label">Run this command:</div>
+                                <div class="command-code">sudo systemctl enable --now supergfxd.service</div>
+                                <button class="copy-btn"
+                                    onclick="copyCommand(this, 'sudo systemctl enable --now supergfxd.service')">Copy</button>
+                            </div>
+                            <span class="reassurance">🛡️ Safe to run • Fully reversible</span>
+                        </div>
+
+                    </div>
+                    <a href="https://asus-linux.org/guides/fedora-guide/" class="help-link" target="_blank">
+                        📘 Full Fedora guide with advanced tweaks →
+                    </a>
+                </div>
+                <!-- Debian content 
+ ────୨ৎ────────୨ৎ────
+ ────୨ৎ────────୨ৎ────-->
+                <div id="ubuntu" class="tab-content">
+                    <div>
+                        <h3 class="step-title">Note</h3>
+                        <p class="step-description">Arch linux is only supported distro for asus laptop, for easy
+                            installation we recommend CachyOS.</p>
+                    </div>
+                    <div class="steps-container">
+                        <div class="step-block">
+
+                            <h3 class="step-title">Debian based distros</h3>
+                            <p class="step-description">Work is on progress for this distro</p>
+
+                            <div class="command-block">
+                                <div class="command-label">Run this command:</div>
+                                <div class="command-code">Work is on progress for this distro, we don't really support
+                                    you can try CachyOS, Garuda Linux or EndeavourOS for GUI based installation</div>
+                                <button class="copy-btn"
+                                    onclick="copyCommand(this, 'sorry we are not available here')">Copy</button>
+                            </div>
+
+                            <div class="expected-output">
+                                <div class="expected-label">Expected output</div>
+                                <div class="expected-text">If you really want that distro you can check out git for
+                                    manual installation instruction</div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <a href="https://asus-linux.org/guides/" class="help-link" target="_blank">
+                        ⚠️ Having trouble? Get step-by-step fixes →
+                    </a>
+                </div>
+
+
+                <!-- Open SUSE content 
+ ────୨ৎ────────୨ৎ────
+ ────୨ৎ────────୨ৎ────-->
+                <div id="opensuse" class="tab-content">
+                    <div>
+                        <h3 class="step-title">Note</h3>
+                        <p class="step-description">Arch linux is only supported distro for asus laptop, for easy
+                            installation we recommend CachyOS.</p>
+                    </div>
+                    <div class="steps-container">
+                        <div class="step-block">
+                            <span class="step-indicator">Step 1 of 3</span>
+                            <h3 class="step-title">Add the repository</h3>
+                            <p class="step-description">Enable the asus-linux repository for openSUSE</p>
+
+                            <div class="command-block">
+                                <div class="command-label">Run this command:</div>
+                                <div class="command-code">sudo zypper ar
+                                    https://download.opensuse.org/repositories/home:/luke_nukem:/asus/openSUSE_Tumbleweed/
+                                    asus</div>
+                                <button class="copy-btn"
+                                    onclick="copyCommand(this, 'sudo zypper ar https://download.opensuse.org/repositories/home:/luke_nukem:/asus/openSUSE_Tumbleweed/ asus')">Copy</button>
+                            </div>
+
+                            <div class="expected-output">
+                                <div class="expected-label">Expected output</div>
+                                <div class="expected-text">Repository added successfully.</div>
+                            </div>
+                        </div>
+
+                        <div class="step-block">
+                            <span class="step-indicator">Step 2 of 3</span>
+                            <h3 class="step-title">Install the package</h3>
+                            <p class="step-description">Download and install asusctl</p>
+
+                            <div class="command-block">
+                                <div class="command-label">Run this command:</div>
+                                <div class="command-code">sudo zypper install asusctl</div>
+                                <button class="copy-btn"
+                                    onclick="copyCommand(this, 'sudo zypper install asusctl')">Copy</button>
+                            </div>
+
+                            <div class="expected-output">
+                                <div class="expected-label">Expected output</div>
+                                <div class="expected-text">Package installs and services start automatically.</div>
+                            </div>
+                        </div>
+
+                        <div class="step-block">
+                            <span class="step-indicator">Step 3 of 3</span>
+                            <h3 class="step-title">Launch the app</h3>
+                            <p class="step-description">Find ROG Control Center in your applications menu</p>
+
+                            <span class="reassurance">🛡️ Safe to run • Fully reversible</span>
+                        </div>
+                    </div>
+
+                    <a href="https://asus-linux.org/guides/" class="help-link" target="_blank">
+                        ⚠️ Having trouble? Get step-by-step fixes →
+                    </a>
+                </div>
+                <!-- CachyOS content
+ ────୨ৎ────────୨ৎ────
+ ────୨ৎ────────୨ৎ────-->
+                <div id="cachyos" class="tab-content">
+                    <div>
+                        <h3 class="step-title">Note</h3>
+                        <p class="step-description">This our recommend Arch-based distro, this provides an easy
+                            installation experience. All drivers comes with it.</p>
+                    </div>
+                    <div class="steps-container">
+                        <div class="step-block">
+                            <span class="step-indicator">Step 1 of 3</span>
+                            <h3 class="step-title">Fan profiles</h3>
+                            <p class="step-description">this helps you with fan control and performance optimization.
+                            </p>
+
+                            <div class="command-block">
+                                <div class="command-label">Run this command:</div>
+                                <div class="command-code">sudo pacman -S asusctl power-profiles-daemon
+                                    systemctl enable --now power-profiles-daemon.service
+                                </div>
+                                <button class="copy-btn"
+                                    onclick="copyCommand(this, 'sudo pacman -S asusctl power-profiles-daemon\nsystemctl enable --now power-profiles-daemon.service')">Copy</button>
+                            </div>
+
+                            <div class="expected-output">
+                                <div class="expected-label">Expected output</div>
+                                <div class="expected-text">Fans start automatically.</div>
+                            </div>
+                        </div>
+
+                        <div class="step-block">
+                            <span class="step-indicator">Step 2 of 3</span>
+                            <h3 class="step-title">Graphics switching</h3>
+                            <p class="step-description">This step is for having DGPU</p>
+
+                            <div class="command-block">
+                                <div class="command-label">Run this command:</div>
+                                <div class="command-code">sudo pacman -S supergfxctl systemctl enable --now supergfxd</div>
+                                <button class="copy-btn"
+                                    onclick="copyCommand(this, 'sudo pacman -S supergfxctl\nsystemctl enable --now supergfxd')">Copy</button>
+                            </div>
+
+                            <div class="expected-output">
+                                <div class="expected-label">Expected output</div>
+                                <div class="expected-text">You will be able to switch GPUs by running the supergfxctl <command class="command-label">supergfxctl -g</command></div>
+                            </div>
+                        </div>
+
+                        <div class="step-block">
+                            <span class="step-indicator">Step 3 of 3</span>
+                            <h3 class="step-title">Launch the app</h3>
+                            <p class="step-description">Find ROG Control Center in your applications menu</p>
+
+                            <span class="reassurance">🛡️ Safe to run • Fully reversible</span>
+                        </div>
+                    </div>
+
+                    <a href="https://asus-linux.org/guides/" class="help-link" target="_blank">
+                        ⚠️ Having trouble? Get step-by-step fixes →
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="whats-next">
+        <h2 class="whats-next-title">What's Next?</h2>
+
+        <div class="next-grid">
+            <a href="#open-app" class="next-card">
+                <span class="next-icon">🚀</span>
+                <h3 class="next-title">Open Control Center</h3>
+                <p class="next-desc">Launch the app and explore profiles, GPU modes, and fan controls. Your
+                    dashboard is ready.</p>
+            </a>
+
+            <a href="#playbooks" class="next-card">
+                <span class="next-icon">📖</span>
+                <h3 class="next-title">Start with a Playbook</h3>
+                <p class="next-desc">Follow quick guides to switch GPUs, cap battery charge, or quiet your fans in
+                    under 3 minutes.</p>
+            </a>
+
+            <a href="#models" class="next-card">
+                <span class="next-icon">💻</span>
+                <h3 class="next-title">See supported laptops</h3>
+                <p class="next-desc">Check which features work on your specific ROG model and report new hardware.
+                </p>
+            </a>
+        </div>
+
+        <div class="faq-section">
+            <h2 class="faq-title">Frequently Asked Questions</h2>
+
+            <div class="faq-item" onclick="toggleFAQ(this)">
+                <div class="faq-question">
+                    <span class="faq-toggle">+</span>
+                    What does ROG Control Center do?
+                </div>
+                <div class="faq-answer">
+                    ROG Control Center gives you full control over your ASUS ROG laptop's hardware on Linux. Switch
+                    between integrated and dedicated GPUs, customize fan curves, manage battery charge limits, and
+                    create performance profiles—all without touching config files or terminal commands.
+                </div>
+            </div>
+
+            <div class="faq-item" onclick="toggleFAQ(this)">
+                <div class="faq-question">
+                    <span class="faq-toggle">+</span>
+                    Does it work with my model?
+                </div>
+                <div class="faq-answer">
+                    Most ASUS ROG laptops from 2018 onwards are supported, including G14, G15, Flow X13, Zephyrus,
+                    and Strix series. Check the Models page for your specific laptop and see which features are
+                    available. If your model isn't listed, you can report it to help expand support.
+                </div>
+            </div>
+
+            <div class="faq-item" onclick="toggleFAQ(this)">
+                <div class="faq-question">
+                    <span class="faq-toggle">+</span>
+                    Is it safe? Can I uninstall it?
+                </div>
+                <div class="faq-answer">
+                    Yes. All changes are reversible, and the app includes confirmations for risky actions. To
+                    uninstall, simply remove the packages using your package manager:
+                    <code>sudo pacman -R asusctl supergfxctl</code> (Arch) or equivalent for your distro. Your
+                    system returns to defaults.
+                </div>
+            </div>
+
+            <div class="faq-item" onclick="toggleFAQ(this)">
+                <div class="faq-question">
+                    <span class="faq-toggle">+</span>
+                    What if I need help or encounter an error?
+                </div>
+                <div class="faq-answer">
+                    Check the Playbooks section for step-by-step troubleshooting guides. For detailed help, visit <a
+                        href="https://asus-linux.org/guides/" target="_blank">asus-linux.org/guides</a>. You can
+                    also join the community Discord or GitHub discussions for real-time support.
+                </div>
+            </div>
+
+            <div class="faq-item" onclick="toggleFAQ(this)">
+                <div class="faq-question">
+                    <span class="faq-toggle">+</span>
+                    Will this break Secure Boot or dual-boot with Windows?
+                </div>
+                <div class="faq-answer">
+                    ROG Control Center works with Secure Boot enabled on most distros. For dual-boot setups, GPU
+                    switching may require a reboot, but Windows will recognize the changes. If you encounter issues,
+                    check the Playbooks for specific guides on Secure Boot configuration and dual-boot GPU
+                    management.
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<button class="sticky-help" onclick="scrollToHelp()">
+    <span>⚠️</span> Problems or errors?
+</button>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ get_url(path='js/install.js') }}"></script>
+{% endblock %}

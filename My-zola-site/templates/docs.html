@@ -1,0 +1,141 @@
+{% extends "subpage.html"%}
+{% block extra_css %}
+
+<link rel="stylesheet" href="{{ get_url(path='css/docs.css') }}">
+{% endblock %}
+
+{% block title %}asus-linux-docs{% endblock %}
+
+{% block content %}
+   
+  <!-- Navigation -->
+  
+
+  <!-- Main Container -->
+  <div class="container">
+    <div class="docs-layout">
+      <!-- Sidebar Navigation -->
+      <aside class="sidebar">
+        <h3>Getting Started</h3>
+        <ul>
+          <li><a href="#" class="active">Quick Start</a></li>
+          <li><a href="#">Installation</a></li>
+          <li><a href="#">Configuration</a></li>
+        </ul>
+
+        <h3 style="margin-top: 2rem;">Core Concepts</h3>
+        <ul>
+          <li><a href="#">Profiles</a></li>
+          <li><a href="#">Performance Modes</a></li>
+          <li><a href="#">Fan Control</a></li>
+        </ul>
+
+        <h3 style="margin-top: 2rem;">Advanced</h3>
+        <ul>
+          <li><a href="#">Custom Scripts</a></li>
+          <li><a href="#">API Reference</a></li>
+          <li><a href="#">Troubleshooting</a></li>
+        </ul>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="content">
+        <h1>Quick Start Guide</h1>
+        <div class="meta">Last updated: November 8, 2025 • 5 min read</div>
+
+        <p>ROG Control Center is an open-source Linux utility that gives you full control over your ASUS ROG laptop's performance settings, fan curves, RGB lighting, and power management.</p>
+
+        <div class="info-box">
+          <strong>⚡ Prerequisites:</strong> Linux kernel 5.10+ • Python 3.8+ • Root access for hardware control
+        </div>
+
+        <h2>Installation</h2>
+        <p>Install ROG Control Center using your preferred package manager or build from source.</p>
+
+        <h3>Using Package Manager</h3>
+        <div class="code-block">
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          <pre>sudo pacman -S rog-control-center
+sudo systemctl enable --now rog-control-center</pre>
+        </div>
+
+        <h3>Build from Source</h3>
+        <div class="code-block">
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          <pre>git clone https://github.com/rog-control/rog-control-center
+cd rog-control-center
+cargo build --release
+sudo make install</pre>
+        </div>
+
+        <div class="info-box success">
+          <strong>✓ Verify Installation:</strong> Run <code>rogcc --version</code> to confirm successful installation.
+        </div>
+
+        <h2>Basic Usage</h2>
+        <p>After installation, you can control your laptop through the GUI application or command line interface.</p>
+
+        <h3>Launch GUI</h3>
+        <div class="code-block">
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          <pre>rog-control-center-gui</pre>
+        </div>
+
+        <h3>Command Line Examples</h3>
+        <div class="code-block">
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          <pre># Switch to performance mode
+rogcc profile set performance
+
+# Adjust fan curve
+rogcc fan set-curve custom --temp 50:40 60:60 70:80
+
+# Control RGB lighting
+rogcc rgb set-mode rainbow --speed 2</pre>
+        </div>
+
+        <h2>Configuration</h2>
+        <p>ROG Control Center uses a YAML configuration file located at <code>~/.config/rog-control-center/config.yaml</code>. You can customize default profiles, fan curves, and behavior.</p>
+
+        <div class="code-block">
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          <pre>default_profile: balanced
+startup_delay: 5
+notifications:
+  profile_switch: true
+  battery_threshold: 20</pre>
+        </div>
+
+        <h2>Next Steps</h2>
+        <ul>
+          <li>Explore <a href="#" style="color: var(--accent-red);">Performance Modes</a> to understand different profiles</li>
+          <li>Learn about <a href="#" style="color: var(--accent-red);">Fan Control</a> for custom cooling</li>
+          <li>Check the <a href="#" style="color: var(--accent-red);">API Reference</a> for automation</li>
+        </ul>
+
+        <div class="info-box">
+          <strong>💡 Pro Tip:</strong> Join our Discord community for support and to share your custom profiles with other users.
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    function copyCode(button) {
+      const codeBlock = button.parentElement;
+      const code = codeBlock.querySelector('pre').textContent;
+      
+      navigator.clipboard.writeText(code).then(() => {
+        button.textContent = 'Copied!';
+        button.classList.add('copied');
+        
+        setTimeout(() => {
+          button.textContent = 'Copy';
+          button.classList.remove('copied');
+        }, 2000);
+      });
+    }
+  </script>
+</body>
+</html>
+{% endblock %}

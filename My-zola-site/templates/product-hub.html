@@ -1,0 +1,181 @@
+{% extends "base.html" %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ get_url(path='css/product.css') }}">
+<link rel="stylesheet" href="{{ get_url(path='css/global.css')}}">
+{% endblock %}
+
+{% block title %}Playbooks - ROG Control Center{% endblock %}
+
+{% block content %}
+
+
+    <main>
+        <section class="hero">
+            <h1>Control your ASUS laptop on Linux</h1>
+            <p class="hero-subtext">CLI power with a clean GUI. Switch GPUs, manage fans, protect your battery, and create performance profiles—all reversible and transparent.</p>
+
+            <div class="cta-group">
+                <a href="rog-install-complete.html" class="btn btn-primary">Get Control Center</a>
+                
+            </div>
+        </section>
+
+        <section class="explainer">
+            <p><strong>How it works:</strong> ROG Control Center is a graphical interface built on top of two powerful CLI tools—<strong>asusctl</strong> and <strong>supergfxctl</strong>. These daemons handle all hardware communication, while the GUI gives you an intuitive way to control everything.</p>
+            
+            <p><strong>asusctl</strong> manages fans, LEDs, keyboard backlight, battery charge limits, and device-specific features. <strong>supergfxctl</strong> handles GPU mode switching (iGPU/Hybrid/dGPU) and MUX control.</p>
+            
+            <p><strong>Why both?</strong> New users get a polished app. Power users and server admins can script everything via CLI. Both paths use the same battle-tested foundations.</p>
+        </section>
+
+        <section class="diagram-container">
+            <h2>How they work together</h2>
+            <div class="diagram">
+                <svg viewBox="0 0 800 300" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Hardware Layer -->
+                    <rect x="50" y="230" width="700" height="50" fill="#1a1a1a" stroke="#2a2a2a" stroke-width="2" rx="8"/>
+                    <text x="400" y="260" text-anchor="middle" fill="#a0a0a0" font-size="16" font-weight="600">Hardware (Fans • GPU • Battery • LEDs)</text>
+                    
+                    <!-- Daemon Layer -->
+                    <rect x="100" y="130" width="250" height="60" fill="#1a1a1a" stroke="#2a2a2a" stroke-width="2" rx="8"/>
+                    <text x="225" y="160" text-anchor="middle" fill="#ffffff" font-size="18" font-weight="700">asusctl</text>
+                    <text x="225" y="180" text-anchor="middle" fill="#a0a0a0" font-size="12">Fans • Battery • LEDs</text>
+                    
+                    <rect x="450" y="130" width="250" height="60" fill="#1a1a1a" stroke="#2a2a2a" stroke-width="2" rx="8"/>
+                    <text x="575" y="160" text-anchor="middle" fill="#ffffff" font-size="18" font-weight="700">supergfxctl</text>
+                    <text x="575" y="180" text-anchor="middle" fill="#a0a0a0" font-size="12">GPU • MUX</text>
+                    
+                    <!-- GUI Layer -->
+                    <rect x="250" y="30" width="300" height="60" fill="#1a1a1a" stroke="#ff0050" stroke-width="2" rx="8"/>
+                    <text x="400" y="65" text-anchor="middle" fill="#ffffff" font-size="20" font-weight="700">ROG Control Center</text>
+                    
+                    <!-- Arrows -->
+                    <path d="M 225 190 L 225 230" stroke="#2a2a2a" stroke-width="2" marker-end="url(#arrowgray)"/>
+                    <path d="M 575 190 L 575 230" stroke="#2a2a2a" stroke-width="2" marker-end="url(#arrowgray)"/>
+                    <path d="M 320 90 L 250 130" stroke="#ff0050" stroke-width="2" marker-end="url(#arrowred)"/>
+                    <path d="M 480 90 L 550 130" stroke="#ff0050" stroke-width="2" marker-end="url(#arrowred)"/>
+                    
+                    <defs>
+                        <marker id="arrowgray" markerWidth="10" markerHeight="10" refX="5" refY="3" orient="auto" markerUnits="strokeWidth">
+                            <path d="M0,0 L0,6 L9,3 z" fill="#2a2a2a"/>
+                        </marker>
+                        <marker id="arrowred" markerWidth="10" markerHeight="10" refX="5" refY="3" orient="auto" markerUnits="strokeWidth">
+                            <path d="M0,0 L0,6 L9,3 z" fill="#ff0050"/>
+                        </marker>
+                    </defs>
+                </svg>
+            </div>
+        </section>
+
+        <section>
+            <h2>Explore the tools</h2>
+            <div class="product-cards">
+                <a href="rog-install-complete.html" class="product-card">
+                    <div class="card-label">For everyone</div>
+                    <h3 class="card-title">ROG Control Center</h3>
+                    <p class="card-description">Graphical interface with profiles, GPU switching, battery care, and fan controls. Perfect for new users.</p>
+                    <ul class="card-features">
+                        <li>One-click profiles</li>
+                        <li>GPU mode with reboot handling</li>
+                        <li>Battery charge limits</li>
+                        <li>Fan presets & curves</li>
+                        <li>Per-app profiles</li>
+                    </ul>
+                </a>
+
+                <a href="#asusctl" class="product-card">
+                    <div class="card-label">CLI daemon</div>
+                    <h3 class="card-title">asusctl</h3>
+                    <p class="card-description">Command-line daemon for fans, LEDs, battery caps, and device controls. Script everything.</p>
+                    <ul class="card-features">
+                        <li>Fan control & presets</li>
+                        <li>Keyboard RGB</li>
+                        <li>Battery charge limits</li>
+                        <li>OLED panel care</li>
+                        <li>Model-aware features</li>
+                    </ul>
+                </a>
+
+                <a href="#supergfxctl" class="product-card">
+                    <div class="card-label">GPU switching</div>
+                    <h3 class="card-title">supergfxctl</h3>
+                    <p class="card-description">GPU mode switching CLI. Toggle between iGPU, Hybrid, and dGPU modes with MUX support.</p>
+                    <ul class="card-features">
+                        <li>iGPU / Hybrid / dGPU modes</li>
+                        <li>MUX switching</li>
+                        <li>Reboot management</li>
+                        <li>Current mode query</li>
+                        <li>Works with Wayland & X</li>
+                    </ul>
+                </a>
+            </div>
+        </section>
+
+        <section class="chooser">
+            <h2>Which one is for me?</h2>
+            <div class="chooser-grid">
+                <div class="chooser-option">
+                    <h3>🎯 New user</h3>
+                    <p>Install ROG Control Center. It bundles or depends on the CLI daemons and gives you a clean interface to manage everything.</p>
+                    <a href="rog-install-complete.html">Get Control Center →</a>
+                </div>
+
+                <div class="chooser-option">
+                    <h3>⚙️ Power user</h3>
+                    <p>Install asusctl and supergfxctl directly. Use CLI commands to script hardware control, or run on headless setups.</p>
+                    <a href="#cli-tools">Install CLI tools →</a>
+                </div>
+
+                <div class="chooser-option">
+                    <h3>🔧 Both</h3>
+                    <p>Install everything. Use the GUI day-to-day and CLI for automation. They work together seamlessly.</p>
+                    <a href="rog-install-complete.html">View install options →</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="safety-section">
+            <h2>Safety & transparency</h2>
+            <div class="safety-grid">
+                <div class="safety-item">
+                    <div class="safety-icon">🔄</div>
+                    <div class="safety-content">
+                        <h3>All actions revertible</h3>
+                        <p>Every setting can be undone. Return to defaults with one command or button.</p>
+                    </div>
+                </div>
+
+                <div class="safety-item">
+                    <div class="safety-icon">📋</div>
+                    <div class="safety-content">
+                        <h3>Logs readable</h3>
+                        <p>Clear, human-readable logs show what changed and when. No mystery failures.</p>
+                    </div>
+                </div>
+
+                <div class="safety-item">
+                    <div class="safety-icon">⚠️</div>
+                    <div class="safety-content">
+                        <h3>Confirmations for risky changes</h3>
+                        <p>GPU switching and other critical changes require explicit confirmation.</p>
+                    </div>
+                </div>
+
+                <div class="safety-item">
+                    <div class="safety-icon">💻</div>
+                    <div class="safety-content">
+                        <h3>Model awareness</h3>
+                        <p>Only shows features your hardware supports. No broken options.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{{ get_url(path='js/script.js') }}"></script>
+{% endblock %}
